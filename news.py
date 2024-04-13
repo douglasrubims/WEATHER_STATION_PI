@@ -17,7 +17,7 @@ class News:
         if self.news_list["status"] == "ok":
             for i in range(len(self.news_list["articles"])):
                 line = "⚫️ " + self.news_list["articles"][i]["title"]
-                line = textwrap.wrap(line, width=52)
+                line = textwrap.wrap(line, width=62)
                 list_news.append(line)
         else:
             list_news = ["Erro ao carregar as notícias"]
