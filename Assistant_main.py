@@ -111,7 +111,6 @@ def main():
         epd.display(epd.getbuffer(display.im_black), epd.getbuffer(display.im_red))
     else:
         display.im_black.show()
-        display.im_red.show()
     return True
 
 

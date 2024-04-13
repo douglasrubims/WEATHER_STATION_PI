@@ -16,7 +16,7 @@ class News:
         list_news = []
         if self.news_list["status"] == "ok":
             for i in range(len(self.news_list["articles"])):
-                line = "⚫️ " + self.news_list["articles"][i]["title"]
+                line = "> " + self.news_list["articles"][i]["title"]
                 line = textwrap.wrap(line, width=62)
                 list_news.append(line)
         else:

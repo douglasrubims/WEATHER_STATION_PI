@@ -1,8 +1,15 @@
 # -*- coding:utf-8 -*-
 
 from PIL import Image, ImageDraw, ImageFont
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+debug = int(os.getenv("DEBUG"))
 
 font_choice = 4
+
 if font_choice == 1:
     project_font = "font/Architects_Daughter/ArchitectsDaughter-Regular.ttf"
 elif font_choice == 2:
@@ -20,7 +27,6 @@ elif font_choice == 7:
 else:
     project_font = "font/Open_Sans/OpenSans-SemiBold.ttf"
 
-
 font8 = ImageFont.truetype(project_font, 8)
 font10 = ImageFont.truetype(project_font, 10)
 font12 = ImageFont.truetype(project_font, 12)
@@ -28,7 +34,6 @@ font14 = ImageFont.truetype(project_font, 14)
 font16 = ImageFont.truetype(project_font, 16)
 font24 = ImageFont.truetype(project_font, 24)
 font48 = ImageFont.truetype(project_font, 48)
-
 
 class Display:
     def __init__(self):
@@ -50,4 +55,7 @@ class Display:
         if c == "b":
             self.im_black.paste(im_icon, (x, y), im_icon)
         else:
-            self.im_red.paste(im_icon, (x, y), im_icon)
+            if debug == 0:
+                self.im_red.paste(im_icon, (x, y), im_icon)
+            else:
+                self.im_black.paste(im_icon, (x, y), im_icon)
