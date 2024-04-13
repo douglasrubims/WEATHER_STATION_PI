@@ -6,10 +6,6 @@ import locale
 
 locale.setlocale(locale.LC_TIME, '')
 
-
-# lat = "48.8110548"
-# lon = "2.3"
-
 class Weather:
     def __init__(self, latitude, longitude, api_id):
         self.latitude = latitude
@@ -17,7 +13,7 @@ class Weather:
         self.api_key = api_id
         self.prevision = [0, [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]]]
         self.data = requests.get(
-            f"https://api.openweathermap.org/data/2.5/onecall?lat={self.latitude}&lon={self.longitude}&lang=fr&appid={self.api_key}").json()
+            f"https://api.openweathermap.org/data/3.0/onecall?lat={self.latitude}&lon={self.longitude}&lang=fr&appid={self.api_key}").json()
         self.prevision[0] = self.data["daily"][0]["dt"]
         self.prevision[1][6] = [self.data["daily"][0]["pressure"],
                                 round(self.data["daily"][0]["temp"]["day"] - 273.15, 0)]
@@ -25,7 +21,7 @@ class Weather:
 
     def update(self):
         self.data = requests.get(
-            f"https://api.openweathermap.org/data/2.5/onecall?lat={self.latitude}&lon={self.longitude}&lang=fr&appid={self.api_key}").json()
+            f"https://api.openweathermap.org/data/3.0/onecall?lat={self.latitude}&lon={self.longitude}&lang=fr&appid={self.api_key}").json()
         return self.data
 
     def current_time(self):
@@ -130,31 +126,31 @@ class Weather:
             id = id // 100
             if id == 2:
                 icon = "thunder"
-                weather_detail = "Orage"
+                weather_detail = "Trovoada"
             elif id == 3:
                 icon = "drizzle"
-                weather_detail = "Bruine"
+                weather_detail = "Chuvisco"
             elif id == 5:
                 icon = "rain"
-                weather_detail = "Pluie"
+                weather_detail = "Chuva"
             elif id == 6:
                 icon = "snow"
-                weather_detail = "Neige"
+                weather_detail = "Neve"
             elif id == 7:
                 icon = "atm"
-                weather_detail = "Brouillard"
+                weather_detail = "Névoa"
             else:
-                weather_detail = "Erreur"
+                weather_detail = "Erro"
         else:
             if id == 801:
                 icon = "25_clouds"
-                weather_detail = "Peu nuageux"
+                weather_detail = "Parc. nublado"
             elif id == 802:
                 icon = "50_clouds"
-                weather_detail = "Nuageux"
+                weather_detail = "Nublado"
             elif id == 803 or id == 804:
                 icon = "100_clouds"
-                weather_detail = "Couvert"
+                weather_detail = "Coberto"
 
         return icon, weather_detail
 
