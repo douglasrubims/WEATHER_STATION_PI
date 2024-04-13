@@ -9,7 +9,7 @@ import os
 
 load_dotenv()
 
-debug = os.getenv("DEBUG")
+debug = int(os.getenv("DEBUG"))
 api_key_weather = os.getenv("WEATHER_API_KEY")
 api_key_news = os.getenv("NEWS_API_KEY")
 lat = os.getenv("LOCATION_LATITUDE")
@@ -143,11 +143,9 @@ if __name__ == "__main__":
         print("Main program running...")
         if debug == 0:
             epd.init()
-            epd.Clear()
         main()
         if debug == 0:
             print("Going to sleep...")
-            epd.init()
             epd.sleep()
             print("Sleeping ZZZzzzzZZZzzz")
         print("Done")
